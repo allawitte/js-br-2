@@ -22,7 +22,6 @@ function changeSongState() {
     var run = mediaplayer.classList.contains('play');
     if (run) {
         player.play();
-        return;
     }
     else {
         player.pause();
@@ -40,17 +39,15 @@ function stopSong() {
 function goBack() {
     counter--;
     counter = counter >= 0 ? counter : 2;
-    player.src = songs[counter];
-    player.play();
-    title.title = getTitle(songs[counter]);
-    if(!mediaplayer.classList.contains('play')) {
-        mediaplayer.classList.add('play')
-    }
+    setNewSong();
 }
 
 function goNext() {
     counter++;
     counter = counter < 3 ? counter : 0;
+    setNewSong();
+}
+function setNewSong(){
     player.src = songs[counter];
     player.play();
     title.title = getTitle(songs[counter]);
@@ -58,7 +55,6 @@ function goNext() {
         mediaplayer.classList.add('play')
     }
 }
-
 back.onclick = goBack;
 playstate.onclick = changeSongState;
 stop.onclick = stopSong;
